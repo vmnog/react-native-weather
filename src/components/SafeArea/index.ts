@@ -6,8 +6,8 @@ const SafeArea = styled.SafeAreaView`
   flex-direction: column;
 
   flex: 1;
-  
-  background: ${colors.black}; // esta cor irá mudar quando o usuario estiver logado
+
+  background: ${colors.white};
 `;
 
 export default SafeArea;
