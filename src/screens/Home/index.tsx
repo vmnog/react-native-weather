@@ -4,11 +4,12 @@ import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
 
-import { Container } from './styles';
-
-import colors from '../../styles/colors';
 import api from '../../services/axios';
-import { IWeatherDTO } from '../../@types/weather';
+import colors from '../../styles/colors';
+
+import { Container } from './styles';
+import { IWeatherDTO } from '../../dtos/IWeatherDTO';
+import kelvinToCelsius from '../../utils/kelvinToCelsius';
 
 const Home: React.FC = () => {
   const [location, setLocation] = useState<GeolocationResponse>();
@@ -34,15 +35,22 @@ const Home: React.FC = () => {
 
   const loadWeather = useCallback(async () => {
     try {
-      const { data } = await api.get(
-        'weather?lat=-23.6096&lon=-46.7260&appid=f6bdcd1ec154f80eb99c332e7fecab5c'
-      );
+      const { data } = await api.get('weather', {
+        params: {
+          lat: '-23.6096',
+          lon: '-46.7260',
+        },
+        // params: {
+        //   lat: location!.coords.latitude,
+        //   lon: location!.coords.longitude,
+        // },
+      });
 
       setWeather(data);
     } catch (err) {
       console.log('Erro ao carregar clima: ', err);
     }
-  }, []);
+  }, [setWeather]);
 
   return (
     <Container>
@@ -60,32 +68,29 @@ const Home: React.FC = () => {
       {!!weather && (
         <>
           <Text style={{ color: colors.black }}>
-            clima: {weather.weather[0].main}, {weather.weather[0].description}
+            clima: {weather.weather[0].description}
           </Text>
           <Text style={{ color: colors.black }}>região: {weather.name}</Text>
           <Text style={{ color: colors.black }}>
-            vento: {weather.wind.speed}
+            vento: {weather.wind.speed} m/s
           </Text>
           <Text style={{ color: colors.black }}>
-            nuvems: {weather.clouds.all}
+            nuvems: {weather.clouds.all}%
           </Text>
           <Text style={{ color: colors.black }}>
-            temperatura: {weather.main.temp}
+            temperatura: {kelvinToCelsius(weather.main.temp)}
           </Text>
           <Text style={{ color: colors.black }}>
-            sensação termica: {weather.main.feels_like}
+            sensação termica: {kelvinToCelsius(weather.main.feels_like)}
           </Text>
           <Text style={{ color: colors.black }}>
-            temp. min.: {weather.main.temp_min}
+            temp. min.: {kelvinToCelsius(weather.main.temp_min)}
           </Text>
           <Text style={{ color: colors.black }}>
-            temp. max.: {weather.main.temp_max}
+            temp. max.: {kelvinToCelsius(weather.main.temp_max)}
           </Text>
           <Text style={{ color: colors.black }}>
-            pressão: {weather.main.pressure}
-          </Text>
-          <Text style={{ color: colors.black }}>
-            humidade: {weather.main.humidity}
+            humidade: {weather.main.humidity}%
           </Text>
         </>
       )}

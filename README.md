@@ -20,6 +20,9 @@
 ### ⁉️ Como rodar o projeto ?
 
 ```bash
+# Copie o .env e insira sua API key no arquivo .env
+$ cp .env.example .env
+
 # Instale todas as dependências
 $ yarn or npm i
 
