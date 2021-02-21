@@ -8,8 +8,8 @@
 - [React Native](https://reactnative.dev/)
 - [Android Studio](https://developer.android.com/studio) (optional)
 - [XCode](https://developer.apple.com/xcode/) (optional)
-
-<br/>
+- [Chave de Acesso da API](http://api.openweathermap.org/) Open Weather Map API
+  <br/>
 
 ### Mapeamento das funcionalidades
 
@@ -20,7 +20,7 @@
 ### ⁉️ Como rodar o projeto ?
 
 ```bash
-# Copie o .env e insira sua API key no arquivo .env
+# Copie o .env e insira sua API_KEY no arquivo .env
 $ cp .env.example .env
 
 # Instale todas as dependências
