@@ -1,6 +1,5 @@
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
-
 import LinearGradient from 'react-native-linear-gradient';
 
 import Home from './screens/Home';
