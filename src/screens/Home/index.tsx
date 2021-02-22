@@ -12,6 +12,7 @@ import { pt } from 'date-fns/locale';
 import UserLocation from '../../components/UserLocation';
 import CurrentTemperature from '../../components/CurrentTemperature';
 import SecondaryData from '../../components/SecondaryData';
+import ReloadButton from '../../components/ReloadButton';
 
 const Home: React.FC = () => {
   const { location, loadLocation } = useLocation();
@@ -41,17 +42,21 @@ const Home: React.FC = () => {
         <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
       }
     >
-      {!!weather && !loading && (
-        <Container animation="fadeIn" easing="ease-in">
-          <UserLocation weather={weather} />
-          <CurrentTemperature weather={weather} />
-          <SecondaryData weather={weather} />
+      <Container animation="fadeIn" easing="ease-in">
+        {!!weather && !loading && (
+          <>
+            <UserLocation weather={weather} />
+            <CurrentTemperature weather={weather} />
+            <SecondaryData weather={weather} />
 
-          <CurrentDate animation="fadeInUp" easing="ease-in-out">
-            {format(location.timestamp, `cccc, d LLLL`, { locale: pt })}
-          </CurrentDate>
-        </Container>
-      )}
+            <CurrentDate animation="fadeInUp" easing="ease-in-out">
+              {format(location.timestamp, `cccc, d LLLL`, { locale: pt })}
+            </CurrentDate>
+          </>
+        )}
+
+        <ReloadButton onPress={() => loadWeather(location)} />
+      </Container>
     </ScrollView>
   );
 };

@@ -5,7 +5,7 @@ import { spacing } from '../../styles/global';
 import * as Animatable from 'react-native-animatable';
 
 export const SecondaryContainer = styled(Animatable.View)`
-  margin-top: ${spacing.medium};
+  margin-top: ${spacing.small};
 
   display: flex;
   flex-direction: row;

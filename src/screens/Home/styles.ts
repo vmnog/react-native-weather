@@ -10,10 +10,12 @@ export const Container = styled(Animatable.View)`
   flex: 1;
 
   padding: 0 ${spacing.medium};
+
+  margin-top: ${spacing.small};
 `;
 
 export const CurrentDate = styled(Animatable.Text)`
-  margin-top: auto;
+  margin-top: ${spacing.small};
 
   color: ${colors.white};
   font-size: 16px;
