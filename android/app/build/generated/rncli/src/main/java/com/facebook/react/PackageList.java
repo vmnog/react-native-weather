@@ -13,6 +13,12 @@ import java.util.ArrayList;
 
 // @react-native-community/geolocation
 import com.reactnativecommunity.geolocation.GeolocationPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+// react-native-linear-gradient
+import com.BV.LinearGradient.LinearGradientPackage;
+// react-native-text-gradient
+import iyegoroff.RNTextGradient.RNTextGradientPackage;
 
 public class PackageList {
   private Application application;
@@ -58,7 +64,10 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
-      new GeolocationPackage()
+      new GeolocationPackage(),
+      new RNFusedLocationPackage(),
+      new LinearGradientPackage(),
+      new RNTextGradientPackage()
     ));
   }
 }
