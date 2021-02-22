@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import { spacing } from '../../styles/global';
+import * as Animatable from 'react-native-animatable';
 
-export const Container = styled.View`
+export const Container = styled(Animatable.View)`
   display: flex;
   align-items: center;
 
@@ -11,7 +12,7 @@ export const Container = styled.View`
   padding: 0 ${spacing.medium};
 `;
 
-export const CurrentDate = styled.Text`
+export const CurrentDate = styled(Animatable.Text)`
   margin-top: auto;
 
   color: ${colors.white};

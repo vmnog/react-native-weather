@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Text } from 'react-native';
 import { IWeatherDTO } from '../../dtos/IWeatherDTO';
 import kelvinToCelsius from '../../utils/kelvinToCelsius';
 
@@ -18,7 +17,7 @@ interface Props {
 const SecondaryData: React.FC<Props> = ({ weather }) => {
   return (
     <>
-      <SecondaryContainer>
+      <SecondaryContainer animation="slideInLeft" easing="ease-out">
         <SecondaryInfo>
           <SecondaryInfoTitle>Mín.</SecondaryInfoTitle>
           <SecondaryInfoValue>
@@ -32,7 +31,7 @@ const SecondaryData: React.FC<Props> = ({ weather }) => {
           </SecondaryInfoValue>
         </SecondaryInfo>
       </SecondaryContainer>
-      <SecondaryContainer>
+      <SecondaryContainer animation="slideInRight" easing="ease-out">
         <SecondaryInfo>
           <SecondaryInfoTitle>Vento</SecondaryInfoTitle>
           <SecondaryInfoValue>{weather.wind.speed} m/s</SecondaryInfoValue>
@@ -44,7 +43,11 @@ const SecondaryData: React.FC<Props> = ({ weather }) => {
           </SecondaryInfoValue>
         </SecondaryInfo>
       </SecondaryContainer>
-      <SecondaryContainer style={{ marginBottom: 40 }}>
+      <SecondaryContainer
+        style={{ marginBottom: 40 }}
+        animation="slideInLeft"
+        easing="ease-out"
+      >
         <SecondaryInfo>
           <SecondaryInfoTitle>Nuvems</SecondaryInfoTitle>
           <SecondaryInfoValue>{weather.clouds.all}%</SecondaryInfoValue>

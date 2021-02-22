@@ -8,7 +8,6 @@ import { useLocation } from '../../hooks/useLocation';
 import { useLoading } from '../../hooks/useLoading';
 import { useWeather } from '../../hooks/useWeather';
 
-import kelvinToCelsius from '../../utils/kelvinToCelsius';
 import { pt } from 'date-fns/locale';
 import UserLocation from '../../components/UserLocation';
 import CurrentTemperature from '../../components/CurrentTemperature';
@@ -21,7 +20,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     loadLocation();
-
     showToast();
   }, []);
 
@@ -44,12 +42,12 @@ const Home: React.FC = () => {
       }
     >
       {!!weather && !loading && (
-        <Container>
+        <Container animation="fadeIn" easing="ease-in">
           <UserLocation weather={weather} />
           <CurrentTemperature weather={weather} />
           <SecondaryData weather={weather} />
 
-          <CurrentDate>
+          <CurrentDate animation="fadeInUp" easing="ease-in-out">
             {format(location.timestamp, `cccc, d LLLL`, { locale: pt })}
           </CurrentDate>
         </Container>

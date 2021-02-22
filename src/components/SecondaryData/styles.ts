@@ -2,7 +2,9 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import { spacing } from '../../styles/global';
 
-export const SecondaryContainer = styled.View`
+import * as Animatable from 'react-native-animatable';
+
+export const SecondaryContainer = styled(Animatable.View)`
   margin-top: ${spacing.medium};
 
   display: flex;
