@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useCallback, useState } from 'react';
 
 import { Alert } from 'react-native';
-
 import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
-
 interface LocationContextData {
   location: GeolocationResponse;
   loadLocation: () => Promise<void>;

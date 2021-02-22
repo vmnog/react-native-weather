@@ -10,6 +10,8 @@ target 'weatherApp' do
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
+  pod 'RNTextGradientView', :path => '../node_modules/react-native-text-gradient'
+
   target 'weatherAppTests' do
     inherit! :complete
     # Pods for testing
