@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
+import { useErrors } from './useErrors';
 interface LocationContextData {
   location: GeolocationResponse;
   loadLocation: () => Promise<void>;
@@ -14,16 +15,19 @@ const LocationContext = createContext<LocationContextData>(
 );
 
 export const LocationProvider: React.FC = ({ children }) => {
+  const { setErrors } = useErrors();
   const [location, setLocation] = useState<GeolocationResponse>();
 
   const loadLocation = useCallback(async () => {
     try {
       await Geolocation.getCurrentPosition((location) => setLocation(location));
+      setErrors(false);
     } catch (err) {
       Alert.alert(
         '😥 Erro ao carregar localização',
         'Por favor verifique as permissões do aplicativo'
-      );
+        );
+      setErrors(true);
     }
   }, [Geolocation, setLocation]);
 

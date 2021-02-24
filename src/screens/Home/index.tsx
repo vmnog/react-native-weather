@@ -14,9 +14,10 @@ import UserLocation from '../../components/UserLocation';
 import CurrentTemperature from '../../components/CurrentTemperature';
 import SecondaryData from '../../components/SecondaryData';
 import ReloadButton from '../../components/ReloadButton';
+import { useErrors } from '../../hooks/useErrors';
 
 const Home: React.FC = () => {
-  const [hasErrors, setHasErrors] = useState(true);
+  const { hasErrors } = useErrors();
   const { location, loadLocation } = useLocation();
   const { loading, setLoading } = useLoading();
   const { loadWeather, weather } = useWeather();
@@ -53,8 +54,9 @@ const Home: React.FC = () => {
           </CurrentDate>
         </Container>
       )}
+
       <ReloadContainer>
-        {!loading && hasErrors && <ReloadButton onReload={() => loadWeather(location)}/>}
+        {hasErrors && <ReloadButton onReload={() => loadWeather(location)}/>}
       </ReloadContainer>
 
     </ScrollView>
