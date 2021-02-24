@@ -1,18 +1,18 @@
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 
 import { Container, ButtonText } from './styles';
+import * as Animatable from 'react-native-animatable';
 
 interface Props {
-  onPress: (event: GestureResponderEvent) => void;
+  onReload: (event: GestureResponderEvent) => void;
 }
 
-const ReloadButton: React.FC<Props> = ({ onPress }) => {
+const ReloadButton: React.FC<Props> = ({ onReload }) => {
   return (
-    <Animatable.View animation="fadeIn" easing="ease-in-out">
-      <Container onPress={onPress}>
-        <ButtonText>Recarregar</ButtonText>
+    <Animatable.View animation="fadeIn" easing="ease-in" iterationDelay={1000}>
+      <Container onPress={onReload}>
+        <ButtonText>Atualizar informações</ButtonText>
       </Container>
     </Animatable.View>
   );

@@ -5,6 +5,7 @@ import { Alert } from 'react-native';
 import { IWeatherDTO } from '../dtos/IWeatherDTO';
 
 import api from '../services/axios';
+import { useErrors } from './useErrors';
 import { useLoading } from './useLoading';
 
 interface WeatherContextData {
@@ -19,6 +20,8 @@ const WeatherContext = createContext<WeatherContextData>(
 export const WeatherProvider: React.FC = ({ children }) => {
   const [weather, setWeather] = useState<IWeatherDTO>();
   const { setLoading } = useLoading();
+  const { setErrors } = useErrors();
+
 
   const loadWeather = useCallback(
     async (location) => {
@@ -36,11 +39,13 @@ export const WeatherProvider: React.FC = ({ children }) => {
 
         setWeather(data);
         setLoading(false);
+        setErrors(false);
       } catch (err) {
         Alert.alert(
           '😥 Erro ao carregar o clima',
           'Por favor verifique sua conexão com a internet ou tente novamente mais tarde'
         );
+        setErrors(true);
       }
     },
     [setWeather]

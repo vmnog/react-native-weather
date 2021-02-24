@@ -1,19 +1,15 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../../styles/colors';
-import { spacing } from '../../styles/global';
 
 export const Container = styled.TouchableOpacity`
-  margin-top: ${spacing.medium};
-  flex-direction: row;
-
-  background: rgba(106, 173, 239, 0.3);
-
-  padding: 10px 35px;
-
-  border-radius: 16px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  margin-top: ${Platform.OS === 'ios' ? '20px' : '60px'};
 `;
 
 export const ButtonText = styled.Text`
-  font-size: 16px;
+  padding: 20px 35px;
   color: ${colors.white};
 `;

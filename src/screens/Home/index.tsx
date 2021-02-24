@@ -1,27 +1,29 @@
-import React, { useEffect } from 'react';
-import { ToastAndroid, RefreshControl, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, RefreshControl, ScrollView } from 'react-native';
 import { format } from 'date-fns';
 
-import { Container, CurrentDate } from './styles';
+import { Container, CurrentDate, ReloadContainer } from './styles';
 
 import { useLocation } from '../../hooks/useLocation';
 import { useLoading } from '../../hooks/useLoading';
 import { useWeather } from '../../hooks/useWeather';
 
 import { pt } from 'date-fns/locale';
+
 import UserLocation from '../../components/UserLocation';
 import CurrentTemperature from '../../components/CurrentTemperature';
 import SecondaryData from '../../components/SecondaryData';
 import ReloadButton from '../../components/ReloadButton';
+import { useErrors } from '../../hooks/useErrors';
 
 const Home: React.FC = () => {
+  const { hasErrors } = useErrors();
   const { location, loadLocation } = useLocation();
-  const { loading } = useLoading();
+  const { loading, setLoading } = useLoading();
   const { loadWeather, weather } = useWeather();
 
   useEffect(() => {
     loadLocation();
-    showToast();
   }, []);
 
   useEffect(() => {
@@ -32,31 +34,30 @@ const Home: React.FC = () => {
     loadWeather(location);
   };
 
-  const showToast = () => {
-    ToastAndroid.show('Arraste para baixo para atualizar', ToastAndroid.TOP);
-  };
-
   return (
     <ScrollView
+      style={{
+        marginTop: 40,
+      }}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
       }
     >
-      <Container animation="fadeIn" easing="ease-in">
-        {!!weather && !loading && (
-          <>
-            <UserLocation weather={weather} />
-            <CurrentTemperature weather={weather} />
-            <SecondaryData weather={weather} />
+      {!!weather && !loading && (
+        <Container animation="fadeIn" easing="ease-in">
+          <UserLocation weather={weather} />
+          <CurrentTemperature weather={weather} />
+          <SecondaryData weather={weather} />
 
-            <CurrentDate animation="fadeInUp" easing="ease-in-out">
-              {format(location.timestamp, `cccc, d LLLL`, { locale: pt })}
-            </CurrentDate>
-          </>
-        )}
+          <CurrentDate animation="fadeInUp" easing="ease-in-out">
+            {format(location.timestamp, `cccc, d LLLL`, { locale: pt })}
+          </CurrentDate>
+        </Container>
+      )}
 
-        <ReloadButton onPress={() => loadWeather(location)} />
-      </Container>
+      <ReloadContainer>
+        {hasErrors && <ReloadButton onReload={() => loadWeather(location)} />}
+      </ReloadContainer>
     </ScrollView>
   );
 };

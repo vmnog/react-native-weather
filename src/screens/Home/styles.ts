@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import { spacing } from '../../styles/global';
 import * as Animatable from 'react-native-animatable';
+import { Platform } from 'react-native';
 
 export const Container = styled(Animatable.View)`
   display: flex;
@@ -11,7 +12,7 @@ export const Container = styled(Animatable.View)`
 
   padding: 0 ${spacing.medium};
 
-  margin-top: ${spacing.small};
+  padding-top: ${Platform.OS === 'ios' ? spacing.large : 0};
 `;
 
 export const CurrentDate = styled(Animatable.Text)`
@@ -23,4 +24,9 @@ export const CurrentDate = styled(Animatable.Text)`
   text-transform: capitalize;
 
   opacity: 0.8;
+`;
+
+export const ReloadContainer = styled.View`
+  align-items: center;
+  margin-top: ${spacing.medium};
 `;
