@@ -10,6 +10,8 @@ export const Container = styled(Animatable.View)`
   flex: 1;
 
   padding: 0 ${spacing.medium};
+
+  padding-top: ${spacing.large}
 `;
 
 export const CurrentDate = styled(Animatable.Text)`
@@ -21,4 +23,9 @@ export const CurrentDate = styled(Animatable.Text)`
   text-transform: capitalize;
 
   opacity: 0.8;
+`;
+
+export const ReloadContainer = styled.View`
+  align-items: center;
+  margin-top: ${spacing.medium};
 `;
