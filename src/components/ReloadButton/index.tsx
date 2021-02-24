@@ -12,7 +12,7 @@ const ReloadButton: React.FC<Props> = ({ onReload }) => {
   return (
     <Animatable.View animation="fadeIn" easing="ease-in" iterationDelay={1000}>
       <Container onPress={onReload}>
-        <ButtonText>Atualizar informações</ButtonText>
+        <ButtonText>Recarregar</ButtonText>
       </Container>
     </Animatable.View>
   );

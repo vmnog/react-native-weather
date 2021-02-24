@@ -4,6 +4,10 @@ import { spacing } from '../../styles/global';
 import * as Animatable from 'react-native-animatable';
 import { Platform } from 'react-native';
 
+export const Scrollable = styled.ScrollView`
+  margin-top: ${spacing.medium};
+`;
+
 export const Container = styled(Animatable.View)`
   display: flex;
   align-items: center;

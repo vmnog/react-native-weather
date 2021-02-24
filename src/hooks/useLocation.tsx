@@ -21,30 +21,20 @@ export const LocationProvider: React.FC = ({ children }) => {
   const getLocation = async () => {};
 
   const loadLocation = useCallback(async () => {
-    try {
-      await Geolocation.getCurrentPosition(
-        (location) => {
-          setLocation(location);
-        },
-        (error) => {
-          Alert.alert(
-            '😥 Erro ao carregar localização',
-            'Por favor verifique suas permissões de localização e reinicie o aplicativo'
-          );
-          setErrors(true);
-          console.log({ error });
-        },
-        { enableHighAccuracy: false, timeout: 6000, maximumAge: 5000 }
-      );
-      setErrors(false);
-    } catch (err) {
-      // Alert.alert(
-      //   '😥 Erro ao carregar localização',
-      //   'Por favor verifique as permissões do aplicativo'
-      // );
-      console.log({ error2: err });
-      setErrors(true);
-    }
+    await Geolocation.getCurrentPosition(
+      (location) => {
+        setLocation(location);
+      },
+      (error) => {
+        Alert.alert(
+          '😥 Erro ao carregar localização',
+          'Por favor verifique suas permissões de localização e se a localização do dispositivo está ativada e reinicie o aplicativo'
+        );
+        setErrors(true);
+      },
+      { enableHighAccuracy: false, timeout: 6000, maximumAge: 5000 }
+    );
+    setErrors(false);
   }, [Geolocation, setLocation]);
 
   return (

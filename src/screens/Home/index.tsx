@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView } from 'react-native';
 import { format } from 'date-fns';
 
-import { Container, CurrentDate, ReloadContainer } from './styles';
+import { Scrollable, Container, CurrentDate, ReloadContainer } from './styles';
 
 import { useLocation } from '../../hooks/useLocation';
 import { useLoading } from '../../hooks/useLoading';
@@ -17,10 +17,10 @@ import ReloadButton from '../../components/ReloadButton';
 import { useErrors } from '../../hooks/useErrors';
 
 const Home: React.FC = () => {
+  const { loading } = useLoading();
   const { hasErrors } = useErrors();
-  const { location, loadLocation } = useLocation();
-  const { loading, setLoading } = useLoading();
   const { loadWeather, weather } = useWeather();
+  const { location, loadLocation } = useLocation();
 
   useEffect(() => {
     loadLocation();
@@ -35,10 +35,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <ScrollView
-      style={{
-        marginTop: 40,
-      }}
+    <Scrollable
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
       }
@@ -58,7 +55,7 @@ const Home: React.FC = () => {
       <ReloadContainer>
         {hasErrors && <ReloadButton onReload={() => loadWeather(location)} />}
       </ReloadContainer>
-    </ScrollView>
+    </Scrollable>
   );
 };
 
